@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using Logic;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -35,6 +38,15 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapGet("/checkandrecreatetables", () =>
+{
+    var processSQL = new ProcessSQL();
+    processSQL.CheckAndRecreateTables();
+})
+.WithName("CheckAndRecreateTables")
+.WithOpenApi();
+
 
 app.Run();
 
